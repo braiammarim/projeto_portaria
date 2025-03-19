@@ -1,14 +1,14 @@
 # Projeto Entrega Segura
 
 
-#Descrição
+# Descrição
 Este projeto tem como objetivo o desenvolvimento de uma aplicação web voltada para o controle de entregas de mercadorias realizadas em portarias de condomínios residenciais. Através dessa aplicação, os responsáveis pela portaria poderão registrar e acompanhar as entregas de forma eficiente, garantindo que os moradores sejam notificados sobre a chegada de suas encomendas e evitando problemas relacionados ao recebimento e armazenamento das mercadorias.
 
 A aplicação vai ser construída utilizando as seguintes tecnologias:
 
-> HTML5: para estruturar o conteúdo da página.
-> CSS3: para estilizar e deixar a aplicação visualmente atraente e funcional.
-> JavaScript: para adicionar interatividade, como notificações, validação de formulários e interações dinâmicas.
+- HTML5: para estruturar o conteúdo da página.
+- CSS3: para estilizar e deixar a aplicação visualmente atraente e funcional.
+- JavaScript: para adicionar interatividade, como notificações, validação de formulários e interações dinâmicas.
 Funcionalidades
 
 
