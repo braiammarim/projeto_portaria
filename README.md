@@ -1,2 +1,2 @@
-# projeto_portaria
+# Projeto Entrega Segura
 Repositório criado para desenvolvimento do projeto da faculdade
