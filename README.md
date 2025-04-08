@@ -1,20 +1,101 @@
-# Projeto Entrega Segura
+# PortariaTech – Sistema de Controle de Encomendas para Portaria Residencial
 
+# ✨ Visão Geral
 
-# Descrição
-Este projeto tem como objetivo o desenvolvimento de uma aplicação web voltada para o controle de entregas de mercadorias realizadas em portarias de condomínios residenciais. Através dessa aplicação, os responsáveis pela portaria poderão registrar e acompanhar as entregas de forma eficiente, garantindo que os moradores sejam notificados sobre a chegada de suas encomendas e evitando problemas relacionados ao recebimento e armazenamento das mercadorias.
+O PortariaTech é um sistema web responsivo projetado para facilitar o controle e registro de encomendas em portarias residenciais. Voltado para porteiros e administradores de condomínio, o sistema prioriza usabilidade, rapidez e organização no fluxo de entregas.
 
-A aplicação vai ser construída utilizando as seguintes tecnologias:
+# 📊 Benchmark e Proposta de Valor
 
-- HTML5: para estruturar o conteúdo da página.
-- CSS3: para estilizar e deixar a aplicação visualmente atraente e funcional.
-- JavaScript: para adicionar interatividade, como notificações, validação de formulários e interações dinâmicas.
-Funcionalidades
+Com base na análise de plataformas similares (Condomínio21, uCondo, Linx, entre outros), o PortariaTech se diferencia por:
 
+Busca por telefone, bloco ou apartamento
 
-# A aplicação possui as seguintes funcionalidades principais:
+Design moderno e intuitivo
 
-Cadastro de Entrega: O responsável pela portaria pode registrar os dados da entrega, como o nome do entregador, nome do morador, data e hora de chegada da mercadoria, além de informações adicionais (descrição da encomenda).
-Lista de Entregas: A aplicação exibe uma lista de todas as entregas registradas, com filtros para facilitar a busca por encomendas específicas.
-Notificações: O sistema envia notificações automáticas para os moradores sempre que uma entrega for registrada, permitindo que eles sejam informados sobre a chegada de suas mercadorias.
-Histórico de Entregas: O sistema mantém um histórico das entregas realizadas, possibilitando ao administrador consultar entregas passadas e verificar se foram devidamente entregues ao morador.
+Perfil individual do porteiro
+
+Painel com resumo dinâmico das encomendas
+
+# 📄 Estrutura do Sistema
+
+# 🏠 1. Dashboard (Página Inicial)
+
+Busca rápida por telefone, bloco e apartamento
+
+Resumo de encomendas do dia (total, retiradas, pendentes)
+
+Lista das últimas entregas registradas
+
+Acesso ao perfil do porteiro (canto superior direito)
+
+# 🛆 2. Controle de Encomendas Recebidas
+
+Cadastro de nova encomenda com formulário completo
+
+Lista de encomendas com status (Recebida / Retirada)
+
+Ações: editar, excluir, marcar retirada
+
+# 🕜 3. Histórico de Encomendas
+
+Filtros por data, status, bloco, apartamento, nome
+
+Tabela detalhada com informações completas
+
+Exportação para PDF ou Excel
+
+# ⏳ 4. Encomendas Não Retiradas
+
+Lista com tempo de espera em destaque
+
+Alerta para encomendas com mais de X dias
+
+Filtros e ações rápidas para contato ou confirmação de retirada
+
+# 👤 5. Perfil do Porteiro
+
+Visualização e edição de dados do porteiro
+
+Opção para alterar senha e fazer logout
+
+# ⚙️ 6. (Opcional Futuro) Configurações/Administração
+
+Cadastro de porteiros
+
+Gerenciamento de apartamentos e blocos
+
+Logs de acesso
+
+Integração com WhatsApp/Push (planejado)
+
+# 🎭 Elementos Visuais
+
+Paleta de cores: azul, branco e cinza
+
+Tipografia limpa e responsiva
+
+Layout baseado em cards, tabelas e ícones
+
+Design Figma adaptado para web (desktop/tablet)
+
+# 🚀 Futuras Funcionalidades
+
+Notificação automática ao morador
+
+Foto obrigatória da encomenda
+
+Painel com gráficos de desempenho
+
+Validação com QR Code
+
+# 📅 Status do Projeto
+
+Em fase de prototipagem (Figma) e levantamento de requisitos. O próximo passo é iniciar o desenvolvimento front-end com React.js ou similar.
+
+✍️ Contribuições
+
+Sinta-se livre para abrir issues ou forks caso queira contribuir com o projeto.
+
+📃 Licença
+
+Este projeto está licenciado sob a Licença MIT.
