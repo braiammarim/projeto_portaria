@@ -7,3 +7,8 @@ A proposta de design foi criada com base em boas práticas de UX/UI, priorizando
 A identidade visual do PortariaTech mantém um layout limpo e profissional, incorporando o logotipo da marca de forma harmônica na interface e garantindo uma comunicação clara entre o sistema e o usuário. A presença de um botão de acesso ao perfil do porteiro no canto superior direito é um diferencial, reforçando a personalização e controle de acesso ao sistema.
 
 O projeto foi idealizado para ser acessível, funcional e visualmente agradável, criando uma ferramenta poderosa para auxiliar o dia a dia nas portarias, com foco na organização, segurança e agilidade no atendimento aos moradores.
+
+
+# Design criado no FIGMA.
+
+https://www.figma.com/design/NvVJQCHla5Z40EX8egXoXi/PortariaTech?node-id=1-6422&t=qSsOtLCvRrPgM9FK-1
