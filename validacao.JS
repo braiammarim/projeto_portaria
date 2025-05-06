@@ -1,7 +1,23 @@
 // script.js
 
+// Configurações
+const CONFIG = {
+    maxLoginAttempts: 3,
+    lockoutDuration: 15 * 60 * 1000, // 15 minutos em milissegundos
+    debounceTime: 300
+};
+
+// Estado da aplicação
+let loginAttempts = 0;
+let lockoutEndTime = 0;
+
 // Validações do formulário de login
 function validarFormulario() {
+    if (isLockedOut()) {
+        mostrarErroLogin(`Muitas tentativas. Tente novamente em ${getRemainingLockoutTime()} minutos.`);
+        return false;
+    }
+
     const email = document.getElementById("email").value.trim();
     const senha = document.getElementById("senha").value.trim();
 
@@ -25,23 +41,29 @@ function validarFormulario() {
         isValid = false;
     }
 
-    // Simulação de autenticação (substitua por autenticação real depois)
     if (isValid) {
-        // Exemplo de usuário válido
+        mostrarLoading();
+        // Simulação de autenticação (substitua por autenticação real depois)
         const usuarioValido = {
             email: "admin@portariatech.com.br",
             senha: "123456"
         };
-        if (email !== usuarioValido.email || senha !== usuarioValido.senha) {
-            mostrarErroLogin("E-mail e/ou senha incorretos.");
-            return false;
-        } else {
-            // Login bem-sucedido, redireciona para a próxima tela com transição suave
-            setTimeout(function() {
+
+        // Simula uma chamada de API
+        setTimeout(() => {
+            if (email !== usuarioValido.email || senha !== usuarioValido.senha) {
+                loginAttempts++;
+                if (loginAttempts >= CONFIG.maxLoginAttempts) {
+                    lockoutEndTime = Date.now() + CONFIG.lockoutDuration;
+                }
+                mostrarErroLogin("E-mail e/ou senha incorretos.");
+                esconderLoading();
+            } else {
+                // Login bem-sucedido
+                loginAttempts = 0;
                 window.location.href = "dashboard.html";
-            }, 300);
-            return false;
-        }
+            }
+        }, 1000);
     }
     return false;
 }
@@ -60,6 +82,10 @@ function mostrarErro(campoId, mensagem) {
     erroDiv.textContent = mensagem;
     campo.classList.add("campo-invalido");
     campo.parentNode.appendChild(erroDiv);
+    
+    // Adiciona animação de shake
+    campo.classList.add("shake");
+    setTimeout(() => campo.classList.remove("shake"), 500);
 }
 
 // Função para limpar mensagens de erro
@@ -80,6 +106,7 @@ function mostrarErroLogin(mensagem) {
         form.parentNode.insertBefore(erroLogin, form.nextSibling);
     }
     erroLogin.textContent = mensagem;
+    erroLogin.classList.add("fade-in");
 }
 
 function removerErroLogin() {
@@ -88,3 +115,58 @@ function removerErroLogin() {
         erroLogin.remove();
     }
 }
+
+// Funções de loading
+function mostrarLoading() {
+    const button = document.querySelector('.btn-primary');
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner"></span> Entrando...';
+}
+
+function esconderLoading() {
+    const button = document.querySelector('.btn-primary');
+    button.disabled = false;
+    button.innerHTML = 'Entrar';
+}
+
+// Funções de segurança
+function isLockedOut() {
+    return loginAttempts >= CONFIG.maxLoginAttempts && Date.now() < lockoutEndTime;
+}
+
+function getRemainingLockoutTime() {
+    return Math.ceil((lockoutEndTime - Date.now()) / (60 * 1000));
+}
+
+// Validação em tempo real
+document.addEventListener('DOMContentLoaded', () => {
+    const emailInput = document.getElementById('email');
+    const senhaInput = document.getElementById('senha');
+    
+    let emailTimeout;
+    let senhaTimeout;
+
+    emailInput.addEventListener('input', () => {
+        clearTimeout(emailTimeout);
+        emailTimeout = setTimeout(() => {
+            const email = emailInput.value.trim();
+            if (email && !validarEmail(email)) {
+                mostrarErro("email", "Por favor, insira um email válido.");
+            } else {
+                limparErros();
+            }
+        }, CONFIG.debounceTime);
+    });
+
+    senhaInput.addEventListener('input', () => {
+        clearTimeout(senhaTimeout);
+        senhaTimeout = setTimeout(() => {
+            const senha = senhaInput.value.trim();
+            if (senha && senha.length < 6) {
+                mostrarErro("senha", "A senha deve ter pelo menos 6 caracteres.");
+            } else {
+                limparErros();
+            }
+        }, CONFIG.debounceTime);
+    });
+});

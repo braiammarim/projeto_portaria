@@ -8,11 +8,23 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Sistema de portaria inteligente para condomínios">
+    <meta name="description" content="Sistema de portaria inteligente para condomínios - Gerencie visitantes, entregas e segurança do seu condomínio">
 
-    <meta name="keywords" content="portaria, condomínio, segurança, tecnologia">
+    <meta name="keywords" content="portaria, condomínio, segurança, tecnologia, controle de acesso">
 
     <meta name="author" content="PortariaTech">
+
+    <meta name="theme-color" content="#4a90e2">
+
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="PortariaTech - Sistema de Portaria Inteligente">
+
+    <meta property="og:description" content="Gerencie visitantes, entregas e segurança do seu condomínio">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:url" content="https://portariatech.com.br">
 
     <title>PortariaTech - Login</title>
 
@@ -20,17 +32,23 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <header class="header">
+        <header class="header" role="banner">
 
             <div class="logo">
 
-                <img src="assets/logo.png" alt="Logo PortariaTech" class="logo-img">
+                <img src="assets/logo.png" alt="Logo PortariaTech" class="logo-img" width="48" height="48">
 
                 <h1>PortariaTech</h1>
 
@@ -38,19 +56,26 @@
 
         </header>
 
-        <main class="main-content">
+        <main class="main-content" role="main">
 
             <div class="login-container">
 
                 <h2>Login</h2>
 
-                <form id="loginForm" onsubmit="return validarFormulario()">
+                <form id="loginForm" onsubmit="return validarFormulario()" novalidate>
 
                     <div class="form-group">
 
                         <label for="email">Email:</label>
 
-                        <input type="email" id="email" name="email" required>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            autocomplete="email"
+                            aria-describedby="email-error"
+                            placeholder="seu@email.com">
 
                     </div>
 
@@ -58,21 +83,32 @@
 
                         <label for="senha">Senha:</label>
 
-                        <input type="password" id="senha" name="senha" required>
+                        <input 
+                            type="password" 
+                            id="senha" 
+                            name="senha" 
+                            required 
+                            autocomplete="current-password"
+                            aria-describedby="senha-error"
+                            placeholder="••••••••">
 
                     </div>
 
                     <div class="form-group">
 
-                        <button type="submit" class="btn-primary">Entrar</button>
+                        <button type="submit" class="btn-primary">
+
+                            Entrar
+
+                        </button>
 
                     </div>
 
                     <div class="form-links">
 
-                        <a href="recuperar-senha.html">Esqueceu sua senha?</a>
+                        <a href="recuperar-senha.html" class="link-secondary">Esqueceu sua senha?</a>
 
-                        <a href="cadastro.html">Criar nova conta</a>
+                        <a href="cadastro.html" class="link-secondary">Criar nova conta</a>
 
                     </div>
 
@@ -82,7 +118,7 @@
 
         </main>
 
-        <footer class="footer">
+        <footer class="footer" role="contentinfo">
 
             <div class="footer-content">
 
@@ -90,9 +126,9 @@
 
                     <h3>Fale Conosco</h3>
 
-                    <p>Email: atendimento@portariatech.com.br</p>
+                    <p>Email: <a href="mailto:atendimento@portariatech.com.br">atendimento@portariatech.com.br</a></p>
 
-                    <p>WhatsApp: (11) 98888-7777</p>
+                    <p>WhatsApp: <a href="https://wa.me/5511988887777">(11) 98888-7777</a></p>
 
                 </div>
 
