@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entregas Pendentes - PortariaTech">
+    <meta name="author" content="PortariaTech">
+    <title>Entregas Pendentes | PortariaTech</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .btn-voltar {
+            display: inline-block;
+            margin-bottom: 1.2rem;
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+        .btn-voltar:hover {
+            background: #217dbb;
+            transform: scale(1.04);
+        }
+        .entregas-lista {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .entrega-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            padding: 1.2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+        .entrega-info strong {
+            color: var(--primary-color);
+        }
+        .btn-confirmar {
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.7rem;
+            align-self: flex-end;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .btn-confirmar:hover {
+            background: #217dbb;
+            transform: scale(1.04);
+        }
+        .entrega-entregue {
+            background: #eafbe7;
+            border: 1px solid #2ecc71;
+        }
+        .entrega-entregue .entrega-status {
+            color: #2ecc71;
+            font-weight: 700;
+        }
+        .entrega-status {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+        .msg-sucesso {
+            color: #2ecc71;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        .filtros-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+        }
+        .filtros-bar input, .filtros-bar select {
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        @media (min-width: 600px) {
+            .filtros-bar {
+                flex-direction: row;
+                align-items: center;
+                gap: 1.2rem;
+            }
+            .entregas-lista {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Logo PortariaTech" class="logo-img">
+                <h1>PortariaTech</h1>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="login-container" style="max-width:520px;">
+                <a href="dashboard.html" class="btn-voltar">&larr; Voltar</a>
+                <h2>Entregas Pendentes</h2>
+                <div class="filtros-bar">
+                    <input type="text" id="buscaEntrega" placeholder="Buscar por nome, apto ou telefone...">
+                    <select id="filtroStatus">
+                        <option value="todas">Todas</option>
+                        <option value="pendentes">Pendentes</option>
+                        <option value="entregues">Entregues</option>
+                    </select>
+                </div>
+                <div id="entregasLista" class="entregas-lista"></div>
+                <div id="msgSucesso"></div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fale Conosco</h3>
+                    <p>Email: atendimento@portariatech.com.br</p>
+                    <p>WhatsApp: (11) 98888-7777</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Av. Exemplo, 123 - Centro, SP</p>
+                    <p>Horário: 08h às 17h (Seg. a Sex.)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PortariaTech. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Persistência com localStorage
+        const STORAGE_KEY = 'entregas_portariatech';
+        function getEntregas() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            if (data) return JSON.parse(data);
+            // Dados iniciais
+            return [
+                { id: 1, nome: 'João Silva', apartamento: '101', telefone: '11991234567', data: '2024-06-01 10:30', entregue: false },
+                { id: 2, nome: 'Maria Oliveira', apartamento: '102', telefone: '11999887766', data: '2024-06-01 11:10', entregue: false },
+                { id: 3, nome: 'Carlos Souza', apartamento: '201', telefone: '11988776655', data: '2024-06-01 12:00', entregue: false }
+            ];
+        }
+        function setEntregas(arr) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        }
+        let entregas = getEntregas();
+
+        // Busca e filtro
+        document.getElementById('buscaEntrega').addEventListener('input', renderEntregas);
+        document.getElementById('filtroStatus').addEventListener('change', renderEntregas);
+
+        function renderEntregas() {
+            const lista = document.getElementById('entregasLista');
+            const busca = document.getElementById('buscaEntrega').value.trim().toLowerCase();
+            const filtro = document.getElementById('filtroStatus').value;
+            let filtradas = entregas.filter(e => {
+                let matchBusca =
+                    e.nome.toLowerCase().includes(busca) ||
+                    e.apartamento.toLowerCase().includes(busca) ||
+                    e.telefone.includes(busca.replace(/\D/g, ''));
+                let matchStatus =
+                    filtro === 'todas' ||
+                    (filtro === 'pendentes' && !e.entregue) ||
+                    (filtro === 'entregues' && e.entregue);
+                return matchBusca && matchStatus;
+            });
+            lista.innerHTML = '';
+            if (filtradas.length === 0) {
+                lista.innerHTML = '<div style="text-align:center;color:#888;">Nenhuma entrega encontrada.</div>';
+                return;
+            }
+            filtradas.forEach(entrega => {
+                const card = document.createElement('div');
+                card.className = 'entrega-card' + (entrega.entregue ? ' entrega-entregue' : '');
+                card.innerHTML = `
+                    <div class='entrega-info'>
+                        <div><strong>${entrega.nome}</strong> - Apt ${entrega.apartamento}</div>
+                        <div>Telefone: <a href='https://wa.me/55${entrega.telefone}' target='_blank'>${formatarTelefone(entrega.telefone)}</a></div>
+                        <div>Notificado em: ${entrega.data}</div>
+                    </div>
+                    <div class='entrega-status'>${entrega.entregue ? 'Entregue ao morador' : ''}</div>
+                `;
+                if (!entrega.entregue) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-confirmar';
+                    btn.textContent = 'Confirmar Entrega';
+                    btn.onclick = function() { confirmarEntrega(entrega.id); };
+                    card.appendChild(btn);
+                }
+                lista.appendChild(card);
+            });
+        }
+
+        function formatarTelefone(tel) {
+            return `(${tel.substring(0,2)}) ${tel.substring(2,7)}-${tel.substring(7)}`;
+        }
+
+        function confirmarEntrega(id) {
+            if (confirm('Tem certeza que deseja marcar esta entrega como entregue ao morador?')) {
+                entregas = entregas.map(e => e.id === id ? { ...e, entregue: true } : e);
+                setEntregas(entregas);
+                renderEntregas();
+                mostrarSucesso('Entrega confirmada com sucesso!');
+            }
+        }
+
+        function mostrarSucesso(msg) {
+            const el = document.getElementById('msgSucesso');
+            el.textContent = msg;
+            setTimeout(() => { el.textContent = ''; }, 2000);
+        }
+
+        // Inicializa
+        renderEntregas();
+    </script>
+</body>
+</html> 
