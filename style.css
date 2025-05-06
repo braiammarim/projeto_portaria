@@ -39,11 +39,22 @@ body {
     justify-content: flex-start;
 }
 
+<<<<<<< HEAD
 .logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-left: 0;
+=======
+.header .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 150px;
+    -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+>>>>>>> 68f43028f2b702d2a72f6135eab62599564580b1
 }
 
 .logo-img {
@@ -156,10 +167,18 @@ body {
 }
 
 .footer {
+<<<<<<< HEAD
     background-color: var(--primary-color);
     color: white;
     padding: 1.2rem 0.5rem;
     margin-top: 2rem;
+=======
+  background-color: #FFFFFF;
+  padding: 20px;
+  margin-top: 650px;
+  text-align: center;
+  border-radius: 8px;
+>>>>>>> 68f43028f2b702d2a72f6135eab62599564580b1
 }
 
 .footer-content {
