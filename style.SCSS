@@ -1,0 +1,303 @@
+// Estilos globais (variables.scss)
+
+$cor-primaria: #1E90FF;
+
+$cor-secundaria: #FFFFFF;
+
+$cor-texto: #1E1E1E;
+
+$cor-borda: #D9D9D9;
+
+$cor-fundo: #FFFFFF;
+
+ 
+
+// Estilos gerais (style.scss)
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0; }
+
+ 
+
+body {
+
+  font-family: sans-serif;
+
+  background-color: $cor-primaria;
+
+  color: $cor-texto;
+
+}
+
+ 
+
+a {
+
+  text-decoration: none;
+
+  color: $cor-texto;
+
+}
+
+ 
+
+.container {
+
+  max-width: 960px;
+
+  margin: 0 auto;
+
+  padding: 20px;
+
+}
+
+ 
+
+.header {
+
+  background-color: $cor-secundaria;
+
+  padding: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-radius: 8px;
+
+ 
+
+  .logo {
+
+    display: flex;
+
+    align-items: center;
+
+ 
+
+    img {
+
+      width: 40px;
+
+      height: 40px;
+
+      margin-right: 10px;
+
+    }
+
+ 
+
+    h1 {
+
+      font-size: 1.5rem;
+
+    }
+
+  }
+
+ 
+
+  .menu {
+
+    ul {
+
+      list-style: none;
+
+      display: flex;
+
+ 
+
+      li {
+
+        margin-left: 20px;
+
+ 
+
+        a {
+
+          padding: 10px;
+
+          border-radius: 4px;
+
+          transition: background-color 0.3s ease;
+
+ 
+
+          &:hover {
+
+            background-color: lighten($cor-primaria, 40%);
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+ 
+
+ 
+
+ 
+
+.footer {
+
+  background-color: $cor-secundaria;
+
+  padding: 20px;
+
+  margin-top: 20px;
+
+  text-align: center;
+
+  border-radius: 8px;
+
+ 
+
+}
+
+ 
+
+// Formulário (form.scss)
+
+ 
+
+.form-container {
+
+    background-color: $cor-secundaria;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    margin-top: 20px;
+
+ 
+
+  label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+  }
+
+ 
+
+  input, select {
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid $cor-borda;
+
+    border-radius: 4px;
+
+  }
+
+ 
+
+  button {
+
+    background-color: $cor-primaria;
+
+    color: $cor-secundaria;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+ 
+
+ 
+
+    &:hover {
+
+        background-color: darken($cor-primaria, 10%);
+
+    }
+
+ 
+
+  }
+
+ 
+
+ 
+
+ 
+
+}
+
+ 
+
+ 
+
+ 
+
+// Media Queries
+
+ 
+
+@media (max-width: 768px) {
+
+    .header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+ 
+
+        .menu {
+
+            margin-top: 20px;
+
+ 
+
+            ul{
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+ 
+
+                li{
+
+                    margin: 10px 0;
+
+ 
+
+                }
+
+            }
+
+        }
+
+    }
+
+ 
+
+}
