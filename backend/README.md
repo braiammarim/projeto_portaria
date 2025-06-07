@@ -1,22 +1,86 @@
-# PortariaTech Backend
+# Backend do Sistema de Portaria
 
-Backend do sistema PortariaTech desenvolvido em Laravel, fornecendo uma API RESTful para gerenciamento de portaria.
+Este é o backend do Sistema de Portaria, desenvolvido em Laravel. O sistema gerencia visitantes e entregas em um ambiente de portaria.
 
-## 🚀 Tecnologias
+## Tecnologias Utilizadas
 
-- PHP 8.1+
-- Laravel 10.x
-- MySQL 5.7+
-- JWT Authentication
-- WhatsApp API Integration
+- PHP 8.x
+- Laravel Framework
+- MySQL/MariaDB
+- Composer (Gerenciador de dependências PHP)
 
-## 📋 Pré-requisitos
+## Funcionalidades Principais
 
-- PHP 8.1 ou superior
+### Gestão de Visitantes
+- Cadastro de visitantes
+- Listagem de visitantes
+- Visualização detalhada de visitante
+- Edição de informações de visitantes
+- Remoção de visitantes
+
+### Gestão de Entregas
+- Registro de entregas
+- Listagem de entregas
+- Visualização detalhada de entrega
+- Edição de informações de entrega
+- Remoção de entregas
+
+## Estrutura do Projeto
+
+```
+backend/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── VisitanteController.php
+│   │       └── EntregaController.php
+├── routes/
+│   └── web.php
+├── database/
+│   └── migrations/
+├── config/
+└── ...
+```
+
+## Endpoints da API
+
+### Visitantes
+- `GET /visitantes` - Lista todos os visitantes
+- `POST /visitantes` - Cria um novo visitante
+- `GET /visitantes/{id}` - Mostra detalhes de um visitante específico
+- `PUT /visitantes/{id}` - Atualiza informações de um visitante
+- `DELETE /visitantes/{id}` - Remove um visitante
+
+### Entregas
+- `GET /entregas` - Lista todas as entregas
+- `POST /entregas` - Registra uma nova entrega
+- `GET /entregas/{id}` - Mostra detalhes de uma entrega específica
+- `PUT /entregas/{id}` - Atualiza informações de uma entrega
+- `DELETE /entregas/{id}` - Remove uma entrega
+
+## Configuração do Ambiente
+
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   composer install
+   ```
+3. Configure o arquivo `.env` com suas credenciais de banco de dados
+4. Execute as migrações:
+   ```bash
+   php artisan migrate
+   ```
+5. Inicie o servidor:
+   ```bash
+   php artisan serve
+   ```
+
+## Requisitos do Sistema
+
+- PHP >= 8.0
 - Composer
-- MySQL 5.7 ou superior
-- Node.js e NPM
-- Extensões PHP:
+- MySQL/MariaDB
+- Extensões PHP necessárias:
   - BCMath
   - Ctype
   - Fileinfo
@@ -27,192 +91,21 @@ Backend do sistema PortariaTech desenvolvido em Laravel, fornecendo uma API REST
   - Tokenizer
   - XML
 
-## 🔧 Instalação
+## Desenvolvimento
 
-1. Clone o repositório
-```bash
-git clone https://github.com/seu-usuario/portariatech.git
-cd portariatech/backend
-```
+Para contribuir com o desenvolvimento:
 
-2. Instale as dependências do PHP
-```bash
-composer install
-```
+1. Crie uma branch para sua feature
+2. Faça suas alterações
+3. Envie um pull request
 
-3. Configure o ambiente
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+## Segurança
 
-4. Configure o banco de dados no arquivo `.env`
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=portariatech
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-```
+- Todas as rotas são protegidas por autenticação
+- Validação de dados em todas as entradas
+- Sanitização de dados para prevenir injeção SQL
+- Proteção contra CSRF em todos os formulários
 
-5. Execute as migrações e seeders
-```bash
-php artisan migrate --seed
-```
+## Suporte
 
-6. Inicie o servidor
-```bash
-php artisan serve
-```
-
-## 📁 Estrutura do Projeto
-
-```
-backend/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/    # Controladores da aplicação
-│   │   └── Middleware/     # Middlewares de autenticação e validação
-│   │   
-│   ├── Models/             # Modelos Eloquent
-│   └── Services/           # Serviços e lógica de negócio
-├── database/
-│   ├── migrations/         # Migrações do banco de dados
-│   └── seeders/           # Seeders para dados iniciais
-├── routes/
-│   ├── api.php            # Rotas da API
-│   └── web.php            # Rotas web
-└── resources/
-    └── views/             # Views Blade
-```
-
-## 🔐 Autenticação
-
-O sistema utiliza JWT (JSON Web Tokens) para autenticação. Para acessar endpoints protegidos, inclua o token no header:
-
-```
-Authorization: Bearer {seu_token}
-```
-
-### Endpoints de Autenticação
-
-```
-POST /api/login
-Body: {
-    "email": "seu@email.com",
-    "password": "sua_senha"
-}
-
-POST /api/logout
-Header: Authorization: Bearer {token}
-```
-
-## 📡 API Endpoints
-
-### Moradores
-
-```
-GET    /api/moradores          # Lista todos os moradores
-POST   /api/moradores          # Cria novo morador
-GET    /api/moradores/{id}     # Obtém morador específico
-PUT    /api/moradores/{id}     # Atualiza morador
-DELETE /api/moradores/{id}     # Remove morador
-```
-
-### Entregas
-
-```
-GET    /api/entregas           # Lista todas as entregas
-POST   /api/entregas           # Registra nova entrega
-GET    /api/entregas/{id}      # Obtém entrega específica
-PUT    /api/entregas/{id}      # Atualiza entrega
-DELETE /api/entregas/{id}      # Remove entrega
-GET    /api/entregas/portaria/{id}  # Lista entregas por portaria
-```
-
-### Visitantes
-
-```
-GET    /api/visitantes         # Lista todos os visitantes
-POST   /api/visitantes         # Registra novo visitante
-GET    /api/visitantes/{id}    # Obtém visitante específico
-PUT    /api/visitantes/{id}    # Atualiza visitante
-DELETE /api/visitantes/{id}    # Remove visitante
-```
-
-## 📱 Integração WhatsApp
-
-O sistema integra com a API do WhatsApp para envio de notificações automáticas. Configuração no `.env`:
-
-```env
-WHATSAPP_API_KEY=sua_chave
-WHATSAPP_PHONE_NUMBER=seu_numero
-```
-
-### Templates de Mensagem
-
-- Notificação de Entrega
-- Notificação de Visitante
-- Lembretes
-- Alertas
-
-## 📊 Relatórios
-
-Endpoints para geração de relatórios:
-
-```
-GET /api/relatorios/entregas
-GET /api/relatorios/visitantes
-GET /api/relatorios/portaria/{id}
-```
-
-Parâmetros de filtro:
-- data_inicio
-- data_fim
-- status
-- tipo
-
-## 🔍 Logs e Monitoramento
-
-- Logs de atividades em `storage/logs`
-- Monitoramento de erros
-- Rastreamento de requisições
-
-## 🧪 Testes
-
-Execute os testes com:
-
-```bash
-php artisan test
-```
-
-## 📝 Convenções de Código
-
-- PSR-12 para estilo de código
-- Documentação PHPDoc
-- Testes unitários e de integração
-- Versionamento semântico
-
-## 🔄 CI/CD
-
-O projeto utiliza GitHub Actions para:
-- Testes automatizados
-- Análise de código
-- Deploy automático
-
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie sua branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
-
-## 📞 Suporte
-
-Para suporte, envie um email para suporte@portariatech.com.br ou abra uma issue no GitHub.
+Para suporte ou dúvidas, entre em contato com a equipe de desenvolvimento.
