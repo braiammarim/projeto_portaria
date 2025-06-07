@@ -77,12 +77,15 @@ function validarEmail(email) {
 // Função para mostrar mensagem de erro
 function mostrarErro(campoId, mensagem) {
     const campo = document.getElementById(campoId);
-    const erroDiv = document.createElement("div");
-    erroDiv.className = "erro-mensagem";
+    // Verifica se já existe uma mensagem de erro para este campo
+    let erroDiv = campo.parentNode.querySelector('.erro-mensagem');
+    if (!erroDiv) {
+        erroDiv = document.createElement("div");
+        erroDiv.className = "erro-mensagem";
+        campo.parentNode.appendChild(erroDiv);
+    }
     erroDiv.textContent = mensagem;
     campo.classList.add("campo-invalido");
-    campo.parentNode.appendChild(erroDiv);
-    
     // Adiciona animação de shake
     campo.classList.add("shake");
     setTimeout(() => campo.classList.remove("shake"), 500);

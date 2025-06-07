@@ -6,8 +6,9 @@
     <meta name="description" content="Localizar Morador - PortariaTech">
     <meta name="author" content="PortariaTech">
     <title>Localizar Morador | PortariaTech</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="img/logoPortaria.png" href="img/logoPortaria.png">
     <link rel="stylesheet" href="style.css">
+    
     <style>
         .btn-voltar {
             display: inline-block;
@@ -58,13 +59,23 @@
         .erro-mensagem {
             margin-top: 0.7rem;
         }
+        .success-message {
+            color: #2ecc71;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .info-message {
+            color: #3498db;
+            margin-top: 10px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="logo">
-                <img src="assets/logo.png" alt="Logo PortariaTech" class="logo-img">
+                <img src="img/logoPortaria.png" width="55" height="55" left="55px">
                 <h1>PortariaTech</h1>
             </div>
         </header>
@@ -152,6 +163,7 @@
                 html += `<button class='btn-whatsapp' onclick='notificarWhatsapp("${morador.telefone}", "${morador.nome}")'>Notificar via WhatsApp</button>`;
             } else {
                 html += `<div class='erro-mensagem'>O telefone informado não corresponde ao morador deste apartamento.</div>`;
+                html += `<button class='btn-whatsapp' onclick='notificarWhatsapp("${telefoneLimpo}", "Morador")'>Notificar via WhatsApp (Número Informado)</button>`;
             }
             html += '</div>';
             document.getElementById('moradorInfo').innerHTML = html;

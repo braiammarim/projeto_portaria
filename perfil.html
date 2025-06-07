@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perfil do Usuário - PortariaTech">
+    <meta name="author" content="PortariaTech">
+    <title>Perfil | PortariaTech</title>
+    <link rel="icon" type="image/x-icon" href="img/logoPortaria.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #666;
+        }
+        .profile-info {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .profile-section {
+            margin-bottom: 25px;
+        }
+        .profile-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #666;
+        }
+        .info-value {
+            color: #333;
+        }
+        .btn-edit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-edit:hover {
+            background: #217dbb;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .delivery-history {
+            margin-top: 20px;
+        }
+        .delivery-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .delivery-table th,
+        .delivery-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .delivery-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+        .delivery-table tr:hover {
+            background: #f9f9f9;
+        }
+        .delivery-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-entregue {
+            background: #e6f4ea;
+            color: #1e7e34;
+        }
+        .status-pendente {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .delivery-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .delivery-filters select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="img/logoPortaria.png" alt="Logo PortariaTech" class="logo-img">
+                <h1>PortariaTech</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="profile-container">
+                <a href="dashboard.html" class="btn-voltar">&larr; Voltar</a>
+                
+                <div class="profile-header">
+                    <div class="profile-avatar">JD</div>
+                    <h2>João da Silva</h2>
+                    <p>Porteiro - Turno Manhã</p>
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-section">
+                        <h3>Informações Pessoais</h3>
+                        <div class="info-item">
+                            <span class="info-label">Nome Completo</span>
+                            <span class="info-value">João da Silva</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">E-mail</span>
+                            <span class="info-value">joao.silva@portariatech.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Telefone</span>
+                            <span class="info-value">(11) 98765-4321</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Turno</span>
+                            <span class="info-value">Manhã (06h às 14h)</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Estatísticas do Dia</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Entregas</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Visitantes</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">15</div>
+                                <div class="stat-label">Notificações</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Histórico de Entregas</h3>
+                        <div class="delivery-filters">
+                            <select id="filterDate">
+                                <option value="all">Todos os dias</option>
+                                <option value="today">Hoje</option>
+                                <option value="week">Última semana</option>
+                                <option value="month">Último mês</option>
+                            </select>
+                            <select id="filterStatus">
+                                <option value="all">Todos os status</option>
+                                <option value="entregue">Entregue</option>
+                                <option value="pendente">Pendente</option>
+                            </select>
+                        </div>
+                        <div class="delivery-history">
+                            <table class="delivery-table">
+                                <thead>
+                                    <tr>
+                                        <th>Data/Hora</th>
+                                        <th>Apartamento</th>
+                                        <th>Morador</th>
+                                        <th>Entregador</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15/03/2024 14:30</td>
+                                        <td>101</td>
+                                        <td>Maria Silva</td>
+                                        <td>Correios</td>
+                                        <td><span class="delivery-status status-entregue">Entregue</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>15/03/2024 15:45</td>
+                                        <td>203</td>
+                                        <td>João Santos</td>
+                                        <td>iFood</td>
+                                        <td><span class="delivery-status status-entregue">Entregue</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>15/03/2024 16:20</td>
+                                        <td>305</td>
+                                        <td>Ana Oliveira</td>
+                                        <td>Mercado Livre</td>
+                                        <td><span class="delivery-status status-pendente">Pendente</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Configurações</h3>
+                        <div class="info-item">
+                            <span class="info-label">Notificações</span>
+                            <button class="btn-edit">Configurar</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Alterar Senha</span>
+                            <button class="btn-edit">Alterar</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Preferências</span>
+                            <button class="btn-edit">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fale Conosco</h3>
+                    <p>Email: atendimento@portariatech.com.br</p>
+                    <p>WhatsApp: (11) 98888-7777</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Av. Exemplo, 123 - Centro, SP</p>
+                    <p>Horário: 08h às 17h (Seg. a Sex.)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PortariaTech. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Função para filtrar entregas
+        function filterDeliveries() {
+            const dateFilter = document.getElementById('filterDate').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            
+            // Aqui você implementaria a lógica de filtro
+            // Por exemplo, fazer uma requisição ao backend com os filtros
+            console.log('Filtrando entregas:', { dateFilter, statusFilter });
+        }
+
+        // Adicionar event listeners aos filtros
+        document.getElementById('filterDate').addEventListener('change', filterDeliveries);
+        document.getElementById('filterStatus').addEventListener('change', filterDeliveries);
+
+        // Função para carregar histórico de entregas
+        function loadDeliveryHistory() {
+            // Aqui você implementaria a lógica para carregar o histórico
+            // Por exemplo, fazer uma requisição ao backend
+            console.log('Carregando histórico de entregas');
+        }
+
+        // Carregar histórico ao iniciar a página
+        document.addEventListener('DOMContentLoaded', loadDeliveryHistory);
+    </script>
+</body>
+</html> 
