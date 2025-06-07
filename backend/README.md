@@ -1,61 +1,218 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PortariaTech Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend do sistema PortariaTech desenvolvido em Laravel, fornecendo uma API RESTful para gerenciamento de portaria.
 
-## About Laravel
+## 🚀 Tecnologias
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.1+
+- Laravel 10.x
+- MySQL 5.7+
+- JWT Authentication
+- WhatsApp API Integration
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Pré-requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.1 ou superior
+- Composer
+- MySQL 5.7 ou superior
+- Node.js e NPM
+- Extensões PHP:
+  - BCMath
+  - Ctype
+  - Fileinfo
+  - JSON
+  - Mbstring
+  - OpenSSL
+  - PDO
+  - Tokenizer
+  - XML
 
-## Learning Laravel
+## 🔧 Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/portariatech.git
+cd portariatech/backend
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Instale as dependências do PHP
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Configure o ambiente
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Laravel Sponsors
+4. Configure o banco de dados no arquivo `.env`
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=portariatech
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. Execute as migrações e seeders
+```bash
+php artisan migrate --seed
+```
 
-### Premium Partners
+6. Inicie o servidor
+```bash
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📁 Estrutura do Projeto
 
-## Contributing
+```
+backend/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/    # Controladores da aplicação
+│   │   └── Middleware/     # Middlewares de autenticação e validação
+│   │   
+│   ├── Models/             # Modelos Eloquent
+│   └── Services/           # Serviços e lógica de negócio
+├── database/
+│   ├── migrations/         # Migrações do banco de dados
+│   └── seeders/           # Seeders para dados iniciais
+├── routes/
+│   ├── api.php            # Rotas da API
+│   └── web.php            # Rotas web
+└── resources/
+    └── views/             # Views Blade
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🔐 Autenticação
 
-## Code of Conduct
+O sistema utiliza JWT (JSON Web Tokens) para autenticação. Para acessar endpoints protegidos, inclua o token no header:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+Authorization: Bearer {seu_token}
+```
 
-## Security Vulnerabilities
+### Endpoints de Autenticação
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+POST /api/login
+Body: {
+    "email": "seu@email.com",
+    "password": "sua_senha"
+}
 
-## License
+POST /api/logout
+Header: Authorization: Bearer {token}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📡 API Endpoints
+
+### Moradores
+
+```
+GET    /api/moradores          # Lista todos os moradores
+POST   /api/moradores          # Cria novo morador
+GET    /api/moradores/{id}     # Obtém morador específico
+PUT    /api/moradores/{id}     # Atualiza morador
+DELETE /api/moradores/{id}     # Remove morador
+```
+
+### Entregas
+
+```
+GET    /api/entregas           # Lista todas as entregas
+POST   /api/entregas           # Registra nova entrega
+GET    /api/entregas/{id}      # Obtém entrega específica
+PUT    /api/entregas/{id}      # Atualiza entrega
+DELETE /api/entregas/{id}      # Remove entrega
+GET    /api/entregas/portaria/{id}  # Lista entregas por portaria
+```
+
+### Visitantes
+
+```
+GET    /api/visitantes         # Lista todos os visitantes
+POST   /api/visitantes         # Registra novo visitante
+GET    /api/visitantes/{id}    # Obtém visitante específico
+PUT    /api/visitantes/{id}    # Atualiza visitante
+DELETE /api/visitantes/{id}    # Remove visitante
+```
+
+## 📱 Integração WhatsApp
+
+O sistema integra com a API do WhatsApp para envio de notificações automáticas. Configuração no `.env`:
+
+```env
+WHATSAPP_API_KEY=sua_chave
+WHATSAPP_PHONE_NUMBER=seu_numero
+```
+
+### Templates de Mensagem
+
+- Notificação de Entrega
+- Notificação de Visitante
+- Lembretes
+- Alertas
+
+## 📊 Relatórios
+
+Endpoints para geração de relatórios:
+
+```
+GET /api/relatorios/entregas
+GET /api/relatorios/visitantes
+GET /api/relatorios/portaria/{id}
+```
+
+Parâmetros de filtro:
+- data_inicio
+- data_fim
+- status
+- tipo
+
+## 🔍 Logs e Monitoramento
+
+- Logs de atividades em `storage/logs`
+- Monitoramento de erros
+- Rastreamento de requisições
+
+## 🧪 Testes
+
+Execute os testes com:
+
+```bash
+php artisan test
+```
+
+## 📝 Convenções de Código
+
+- PSR-12 para estilo de código
+- Documentação PHPDoc
+- Testes unitários e de integração
+- Versionamento semântico
+
+## 🔄 CI/CD
+
+O projeto utiliza GitHub Actions para:
+- Testes automatizados
+- Análise de código
+- Deploy automático
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie sua branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
+
+## 📞 Suporte
+
+Para suporte, envie um email para suporte@portariatech.com.br ou abra uma issue no GitHub.

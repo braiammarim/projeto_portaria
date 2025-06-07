@@ -1,5 +1,26 @@
 {
+  "name": "portariatech",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão de Portaria",
+  "scripts": {
+    "validate": "node validate-html.js",
+    "validate:watch": "nodemon validate-html.js",
+    "security:audit": "npm audit",
+    "security:fix": "npm audit fix",
+    "security:fix-force": "npm audit fix --force",
+    "preinstall": "npx npm-force-resolutions"
+  },
   "dependencies": {
-    "sass": "^1.87.0"
+    "html-validator": "^6.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "resolutions": {
+    "html-validator": "^6.0.1",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

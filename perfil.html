@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,9 @@
     <link rel="icon" type="image/x-icon" href="img/logoPortaria.png">
     <link rel="stylesheet" href="style.css">
     <style>
+        :root {
+            --primary-color: #2196F3;
+        }
         .profile-container {
             max-width: 600px;
             margin: 0 auto;
@@ -41,7 +44,7 @@
             margin-bottom: 25px;
         }
         .profile-section h3 {
-            color: var(--primary-color);
+            color: #2196F3;
             margin-bottom: 15px;
             border-bottom: 2px solid #eee;
             padding-bottom: 8px;
@@ -61,7 +64,7 @@
             color: #333;
         }
         .btn-edit {
-            background: var(--primary-color);
+            background: #2196F3;
             color: white;
             border: none;
             padding: 8px 15px;
@@ -70,7 +73,7 @@
             transition: background 0.3s;
         }
         .btn-edit:hover {
-            background: #217dbb;
+            background: #1976D2;
         }
         .stats-grid {
             display: grid;
@@ -88,7 +91,7 @@
         .stat-number {
             font-size: 24px;
             font-weight: bold;
-            color: var(--primary-color);
+            color: #2196F3;
         }
         .stat-label {
             font-size: 14px;
@@ -114,7 +117,7 @@
             border-bottom: 1px solid #eee;
         }
         .delivery-table th {
-            background: var(--primary-color);
+            background: #2196F3;
             color: white;
             font-weight: 500;
         }
@@ -146,30 +149,50 @@
             border-radius: 4px;
             background: white;
         }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .btn-voltar {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .btn-voltar:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="logo">
-                <img src="img/logoPortaria.png" alt="Logo PortariaTech" class="logo-img">
+                <img src="img/logoPortaria.png" alt="Logo PortariaTech" class="logo-img" width="50" height="50">
                 <h1>PortariaTech</h1>
             </div>
         </header>
 
         <main class="main-content">
             <div class="profile-container">
-                <a href="dashboard.html" class="btn-voltar">&larr; Voltar</a>
+                <a href="dashboard.html" class="btn-voltar" aria-label="Voltar para o dashboard">&larr; Voltar</a>
                 
                 <div class="profile-header">
-                    <div class="profile-avatar">JD</div>
+                    <div class="profile-avatar" role="img" aria-label="Avatar do usuário João da Silva">JD</div>
                     <h2>João da Silva</h2>
                     <p>Porteiro - Turno Manhã</p>
                 </div>
 
                 <div class="profile-info">
-                    <div class="profile-section">
-                        <h3>Informações Pessoais</h3>
+                    <section class="profile-section" aria-labelledby="info-pessoais">
+                        <h3 id="info-pessoais">Informações Pessoais</h3>
                         <div class="info-item">
                             <span class="info-label">Nome Completo</span>
                             <span class="info-value">João da Silva</span>
@@ -186,10 +209,10 @@
                             <span class="info-label">Turno</span>
                             <span class="info-value">Manhã (06h às 14h)</span>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="profile-section">
-                        <h3>Estatísticas do Dia</h3>
+                    <section class="profile-section" aria-labelledby="estatisticas">
+                        <h3 id="estatisticas">Estatísticas do Dia</h3>
                         <div class="stats-grid">
                             <div class="stat-card">
                                 <div class="stat-number">12</div>
@@ -204,18 +227,20 @@
                                 <div class="stat-label">Notificações</div>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="profile-section">
-                        <h3>Histórico de Entregas</h3>
+                    <section class="profile-section" aria-labelledby="historico">
+                        <h3 id="historico">Histórico de Entregas</h3>
                         <div class="delivery-filters">
-                            <select id="filterDate">
+                            <label for="filterDate" class="sr-only">Filtrar por data</label>
+                            <select id="filterDate" name="filterDate" aria-label="Filtrar por data">
                                 <option value="all">Todos os dias</option>
                                 <option value="today">Hoje</option>
                                 <option value="week">Última semana</option>
                                 <option value="month">Último mês</option>
                             </select>
-                            <select id="filterStatus">
+                            <label for="filterStatus" class="sr-only">Filtrar por status</label>
+                            <select id="filterStatus" name="filterStatus" aria-label="Filtrar por status">
                                 <option value="all">Todos os status</option>
                                 <option value="entregue">Entregue</option>
                                 <option value="pendente">Pendente</option>
@@ -223,13 +248,14 @@
                         </div>
                         <div class="delivery-history">
                             <table class="delivery-table">
+                                <caption>Histórico de Entregas</caption>
                                 <thead>
                                     <tr>
-                                        <th>Data/Hora</th>
-                                        <th>Apartamento</th>
-                                        <th>Morador</th>
-                                        <th>Entregador</th>
-                                        <th>Status</th>
+                                        <th scope="col">Data/Hora</th>
+                                        <th scope="col">Apartamento</th>
+                                        <th scope="col">Morador</th>
+                                        <th scope="col">Entregador</th>
+                                        <th scope="col">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -238,42 +264,42 @@
                                         <td>101</td>
                                         <td>Maria Silva</td>
                                         <td>Correios</td>
-                                        <td><span class="delivery-status status-entregue">Entregue</span></td>
+                                        <td><span class="delivery-status status-entregue" role="status">Entregue</span></td>
                                     </tr>
                                     <tr>
                                         <td>15/03/2024 15:45</td>
                                         <td>203</td>
                                         <td>João Santos</td>
                                         <td>iFood</td>
-                                        <td><span class="delivery-status status-entregue">Entregue</span></td>
+                                        <td><span class="delivery-status status-entregue" role="status">Entregue</span></td>
                                     </tr>
                                     <tr>
                                         <td>15/03/2024 16:20</td>
                                         <td>305</td>
                                         <td>Ana Oliveira</td>
                                         <td>Mercado Livre</td>
-                                        <td><span class="delivery-status status-pendente">Pendente</span></td>
+                                        <td><span class="delivery-status status-pendente" role="status">Pendente</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="profile-section">
-                        <h3>Configurações</h3>
+                    <section class="profile-section" aria-labelledby="configuracoes">
+                        <h3 id="configuracoes">Configurações</h3>
                         <div class="info-item">
                             <span class="info-label">Notificações</span>
-                            <button class="btn-edit">Configurar</button>
+                            <button type="button" class="btn-edit" aria-label="Configurar notificações">Configurar</button>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Alterar Senha</span>
-                            <button class="btn-edit">Alterar</button>
+                            <button type="button" class="btn-edit" aria-label="Alterar senha">Alterar</button>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Preferências</span>
-                            <button class="btn-edit">Editar</button>
+                            <button type="button" class="btn-edit" aria-label="Editar preferências">Editar</button>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </main>
@@ -282,8 +308,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Fale Conosco</h3>
-                    <p>Email: atendimento@portariatech.com.br</p>
-                    <p>WhatsApp: (11) 98888-7777</p>
+                    <p>Email: <a href="mailto:atendimento@portariatech.com.br">atendimento@portariatech.com.br</a></p>
+                    <p>WhatsApp: <a href="https://wa.me/5511988887777">(11) 98888-7777</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Endereço</h3>

@@ -99,3 +99,4 @@ Sinta-se livre para abrir issues ou forks caso queira contribuir com o projeto.
 📃 Licença
 
 Este projeto está licenciado sob a Licença MIT.
+
