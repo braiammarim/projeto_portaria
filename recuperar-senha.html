@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recuperar Senha - PortariaTech">
+    <meta name="author" content="PortariaTech">
+    <title>Recuperar Senha | PortariaTech</title>
+    <link rel="icon" type="image/x-icon" href="img/logoPortaria.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="img/logoPortaria.png" alt="Logo PortariaTech" class="logo-img">
+                <h1>PortariaTech</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="login-container">
+                <h2>Recuperar Senha</h2>
+                <form id="recuperarSenhaForm" onsubmit="return validarFormularioRecuperacao()">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Enviar Link de Recuperação</button>
+                    <div class="form-links">
+                        <a href="login.html">Voltar para o Login</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fale Conosco</h3>
+                    <p>Email: atendimento@portariatech.com.br</p>
+                    <p>WhatsApp: (11) 98888-7777</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Av. Exemplo, 123 - Centro, SP</p>
+                    <p>Horário: 08h às 17h (Seg. a Sex.)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PortariaTech. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function validarFormularioRecuperacao() {
+            const email = document.getElementById("email").value.trim();
+            
+            if (!validarEmail(email)) {
+                mostrarErro("email", "Por favor, insira um e-mail válido.");
+                return false;
+            }
+
+            // Simulação de envio do e-mail
+            mostrarLoading();
+            setTimeout(() => {
+                esconderLoading();
+                alert("Se o e-mail estiver cadastrado em nosso sistema, você receberá um link para redefinir sua senha.");
+                window.location.href = "login.html";
+            }, 1500);
+
+            return false;
+        }
+
+        function validarEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function mostrarErro(campoId, mensagem) {
+            const campo = document.getElementById(campoId);
+            let erroDiv = campo.parentNode.querySelector('.erro-mensagem');
+            if (!erroDiv) {
+                erroDiv = document.createElement("div");
+                erroDiv.className = "erro-mensagem";
+                campo.parentNode.appendChild(erroDiv);
+            }
+            erroDiv.textContent = mensagem;
+            campo.classList.add("campo-invalido");
+            campo.classList.add("shake");
+            setTimeout(() => campo.classList.remove("shake"), 500);
+        }
+
+        function mostrarLoading() {
+            const button = document.querySelector('.btn-primary');
+            button.disabled = true;
+            button.innerHTML = '<span class="spinner"></span> Enviando...';
+        }
+
+        function esconderLoading() {
+            const button = document.querySelector('.btn-primary');
+            button.disabled = false;
+            button.innerHTML = 'Enviar Link de Recuperação';
+        }
+    </script>
+</body>
+</html> 

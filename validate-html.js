@@ -8,7 +8,10 @@ const htmlFiles = [
     'perfil.html',
     'dashboard.html',
     'localizar.html',
-    'login.html'
+    'login.html',
+    'index.html',
+    'entregas.html',
+    'cadastro_mercadorias.html'
 ];
 
 // Função para validar usando o validador W3C
