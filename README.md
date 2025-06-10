@@ -26,7 +26,7 @@ Resumo de encomendas do dia (total, retiradas, pendentes)
 
 Lista das últimas entregas registradas
 
-Acesso ao perfil do porteiro (canto superior direito)
+Acesso ao perfil do porteiro.
 
 # 🛆 2. Controle de Encomendas Recebidas
 
@@ -47,8 +47,6 @@ Exportação para PDF ou Excel
 # ⏳ 4. Encomendas Não Retiradas
 
 Lista com tempo de espera em destaque
-
-Alerta para encomendas com mais de X dias
 
 Filtros e ações rápidas para contato ou confirmação de retirada
 
