@@ -272,9 +272,10 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
-            // Combinar data e hora
-            data.data_entrada = data.data_entrada + ' ' + data.hora_entrada;
-            delete data.hora_entrada;
+            // Garantir que data_entrada está no formato YYYY-MM-DD
+            if (data.data_entrada) {
+                data.data_entrada = data.data_entrada.split('T')[0];
+            }
 
             try {
                 const response = await fetch('http://localhost:8000/api/visitantes', {
