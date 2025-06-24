@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastro de Visitantes - PortariaTech">
+    <meta name="author" content="PortariaTech">
+    <title>Cadastro de Visitantes | PortariaTech</title>
+    <link rel="icon" type="img/logoPortaria.png" href="img/logoPortaria.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="cadastro_visitantes.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="img/logoPortaria.png" width="55" height="55" alt="Logo PortariaTech" style="margin-left: 55px">
+                <h1>PortariaTech</h1>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="login-container" style="max-width:800px;">
+                <a href="dashboard.html" class="btn-voltar">&larr; Voltar</a>
+                <h2>Cadastro de Visitantes</h2>
+                
+                <div id="alertMessage" class="alert d-none"></div>
+
+                <!-- Formulário de Cadastro -->
+                <form id="visitanteForm" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nome" class="form-label required">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome" name="nome" 
+                                   required minlength="3" maxlength="100" 
+                                   pattern="[A-Za-zÀ-ÿ\s]+"
+                                   placeholder="Digite o nome completo">
+                            <div class="invalid-feedback">
+                                Por favor, informe o nome completo (mínimo 3 caracteres, apenas letras).
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cpf" class="form-label required">CPF</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" 
+                                   required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                                   placeholder="000.000.000-00">
+                            <div class="invalid-feedback">
+                                Por favor, informe um CPF válido no formato 000.000.000-00.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="telefone" class="form-label required">Telefone</label>
+                            <input type="tel" class="form-control" id="telefone" name="telefone" 
+                                   required pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                                   placeholder="(11) 91234-5678">
+                            <div class="invalid-feedback">
+                                Por favor, informe um telefone válido no formato (11) 91234-5678.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   placeholder="visitante@email.com">
+                            <div class="invalid-feedback">
+                                Por favor, informe um e-mail válido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="apartamento_visitado" class="form-label required">Apartamento Visitado</label>
+                            <input type="text" class="form-control" id="apartamento_visitado" name="apartamento_visitado" 
+                                   required pattern="\d{1,4}[A-Za-z]?"
+                                   placeholder="101 ou 101A">
+                            <div class="invalid-feedback">
+                                Por favor, informe o número do apartamento.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="motivo_visita" class="form-label">Motivo da Visita</label>
+                            <select class="form-select" id="motivo_visita" name="motivo_visita">
+                                <option value="">Selecione o motivo</option>
+                                <option value="Visita Social">Visita Social</option>
+                                <option value="Prestação de Serviços">Prestação de Serviços</option>
+                                <option value="Entrega">Entrega</option>
+                                <option value="Manutenção">Manutenção</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor, selecione o motivo da visita.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="data_entrada" class="form-label required">Data de Entrada</label>
+                            <input type="date" class="form-control" id="data_entrada" name="data_entrada" 
+                                   required min="">
+                            <div class="invalid-feedback">
+                                Por favor, informe a data de entrada.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="observacoes" class="form-label">Observações</label>
+                        <textarea class="form-control" id="observacoes" name="observacoes" 
+                                  rows="3" maxlength="500" 
+                                  placeholder="Informações adicionais sobre a visita..."></textarea>
+                        <div class="form-text">Máximo 500 caracteres</div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary">Cadastrar Visitante</button>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+
+                <!-- Lista de Visitantes -->
+                <h3>Visitantes Cadastrados</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Morador Visitado</th>
+                                <th>Data/Hora Entrada</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitantesList">
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">Carregando visitantes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fale Conosco</h3>
+                    <p>Email: atendimento@portariatech.com.br</p>
+                    <p>WhatsApp: (11) 98888-7777</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Av. Exemplo, 123 - Centro, SP</p>
+                    <p>Horário: 08h às 17h (Seg. a Sex.)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PortariaTech. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Configurar data mínima como hoje
+        document.getElementById('data_entrada').min = new Date().toISOString().split('T')[0];
+
+        // Máscaras para CPF e telefone
+        function aplicarMascaraCPF(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            input.value = value;
+        }
+
+        function aplicarMascaraTelefone(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 10) {
+                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            } else {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            }
+            input.value = value;
+        }
+
+        // Aplicar máscaras
+        document.getElementById('cpf').addEventListener('input', function() {
+            aplicarMascaraCPF(this);
+        });
+
+        document.getElementById('telefone').addEventListener('input', function() {
+            aplicarMascaraTelefone(this);
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(message, type = 'success') {
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.className = `alert alert-${type} d-block`;
+            alertDiv.textContent = message;
+            setTimeout(() => {
+                alertDiv.className = 'alert d-none';
+            }, 5000);
+        }
+
+        // Função para formatar data/hora
+        function formatarDataHora(dataString) {
+            if (!dataString) return '';
+            const data = new Date(dataString);
+            return data.toLocaleString('pt-BR');
+        }
+
+        // Listar visitantes
+        async function listarVisitantes() {
+            try {
+                const response = await fetch('http://localhost:8000/api/visitantes');
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar visitantes');
+                }
+                const data = await response.json();
+                
+                const tbody = document.getElementById('visitantesList');
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Nenhum visitante cadastrado</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.map(visitante => `
+                    <tr>
+                        <td>${visitante.nome}</td>
+                        <td>${visitante.cpf}</td>
+                        <td>${visitante.telefone}</td>
+                        <td>${visitante.apartamento_visitado}</td>
+                        <td>${formatarDataHora(visitante.data_entrada)}</td>
+                        <td>
+                            <span class="badge bg-${visitante.status === 'Ativo' ? 'success' : 'secondary'}">
+                                ${visitante.status || 'Ativo'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="editarVisitante(${visitante.id})">
+                                Editar
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="excluirVisitante(${visitante.id})">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                showMessage(error.message, 'danger');
+            }
+        }
+
+        // Salvar visitante
+        document.getElementById('visitanteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Só adiciona a classe was-validated quando tenta submeter
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                this.classList.add('was-validated');
+                return;
+            }
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Combinar data e hora
+            data.data_entrada = data.data_entrada + ' ' + data.hora_entrada;
+            delete data.hora_entrada;
+
+            try {
+                const response = await fetch('http://localhost:8000/api/visitantes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao cadastrar visitante');
+                }
+
+                showMessage('Visitante cadastrado com sucesso!');
+                this.reset();
+                // Remove a classe was-validated para esconder as mensagens de validação
+                this.classList.remove('was-validated');
+                listarVisitantes();
+            } catch (error) {
+                showMessage(error.message, 'danger');
+            }
+        });
+
+        // Editar visitante
+        async function editarVisitante(id) {
+            try {
+                const response = await fetch(`http://localhost:8000/api/visitantes/${id}`);
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar dados do visitante');
+                }
+                const data = await response.json();
+                
+                // Preencher formulário
+                document.getElementById('nome').value = data.nome;
+                document.getElementById('cpf').value = data.cpf;
+                document.getElementById('telefone').value = data.telefone;
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('apartamento_visitado').value = data.apartamento_visitado;
+                document.getElementById('motivo_visita').value = data.motivo_visita;
+                document.getElementById('observacoes').value = data.observacoes || '';
+                
+                // Separar data e hora
+                const dataHora = new Date(data.data_entrada);
+                document.getElementById('data_entrada').value = dataHora.toISOString().split('T')[0];
+                
+                // Adicionar ID da mercadoria ao formulário para atualização
+                const form = document.getElementById('visitanteForm');
+                form.dataset.editId = id;
+                
+                // Mudar texto do botão
+                form.querySelector('button[type="submit"]').textContent = 'Atualizar Visitante';
+                
+                // Remove a classe was-validated para esconder mensagens de validação
+                form.classList.remove('was-validated');
+            } catch (error) {
+                showMessage(error.message, 'danger');
+            }
+        }
+
+        // Excluir visitante
+        async function excluirVisitante(id) {
+            if (!confirm('Tem certeza que deseja excluir este visitante?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8000/api/visitantes/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir visitante');
+                }
+
+                showMessage('Visitante excluído com sucesso!');
+                listarVisitantes();
+            } catch (error) {
+                showMessage(error.message, 'danger');
+            }
+        }
+
+        // Carregar lista ao iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            listarVisitantes();
+        });
+    </script>
+</body>
+</html> 

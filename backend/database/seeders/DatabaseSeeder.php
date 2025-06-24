@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        
+        // Adicionar moradores de exemplo
+        $this->call([
+            MoradorSeeder::class,
+        ]);
     }
 }

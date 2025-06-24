@@ -65,7 +65,7 @@
 
                 <h2>Login</h2>
 
-                <form id="loginForm" class="login-form" onsubmit="return validarFormulario()" novalidate>
+                <form id="loginForm" class="login-form" novalidate>
 
                     <div class="form-group">
 
@@ -157,7 +157,82 @@
 
     </div>
 
-    <script src="validacao.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const senha = document.getElementById('senha').value.trim();
+            const btn = document.querySelector('.btn-primary');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Entrando...';
+            // Limpa mensagens de erro
+            document.querySelectorAll('.erro-mensagem').forEach(el => el.remove());
+            document.querySelectorAll('.campo-invalido').forEach(el => el.classList.remove('campo-invalido'));
+
+            let erro = false;
+            if (!email) {
+                mostrarErro('email', 'Por favor, preencha o email.');
+                erro = true;
+            } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                mostrarErro('email', 'Por favor, insira um email válido.');
+                erro = true;
+            }
+            if (!senha) {
+                mostrarErro('senha', 'Por favor, preencha a senha.');
+                erro = true;
+            }
+            if (erro) {
+                btn.disabled = false;
+                btn.innerHTML = 'Entrar';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password: senha })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    // Salva o token se desejar
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    mostrarErroLogin(data.message || 'E-mail e/ou senha incorretos.');
+                }
+            } catch (err) {
+                mostrarErroLogin('Erro ao conectar ao servidor.');
+            }
+            btn.disabled = false;
+            btn.innerHTML = 'Entrar';
+        });
+        function mostrarErro(campoId, mensagem) {
+            const campo = document.getElementById(campoId);
+            let erroDiv = campo.parentNode.querySelector('.erro-mensagem');
+            if (!erroDiv) {
+                erroDiv = document.createElement('div');
+                erroDiv.className = 'erro-mensagem';
+                campo.parentNode.appendChild(erroDiv);
+            }
+            erroDiv.textContent = mensagem;
+            campo.classList.add('campo-invalido');
+            campo.classList.add('shake');
+            setTimeout(() => campo.classList.remove('shake'), 500);
+        }
+        function mostrarErroLogin(mensagem) {
+            let erroLogin = document.getElementById('erro-login');
+            if (!erroLogin) {
+                erroLogin = document.createElement('div');
+                erroLogin.id = 'erro-login';
+                erroLogin.className = 'erro-mensagem erro-login';
+                const form = document.getElementById('loginForm');
+                form.parentNode.insertBefore(erroLogin, form.nextSibling);
+            }
+            erroLogin.textContent = mensagem;
+            erroLogin.classList.add('fade-in');
+        }
+    </script>
 
 </body>
 
