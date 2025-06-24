@@ -24,5 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MoradorSeeder::class,
         ]);
+
+        $user = \App\Models\User::updateOrCreate(
+            ['email' => 'admin@portariatech.com.br'],
+            [
+                'name' => 'Administrador',
+                'password' => bcrypt('123456')
+            ]
+        );
     }
 }

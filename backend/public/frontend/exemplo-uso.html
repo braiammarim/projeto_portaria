@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortariaTech - Exemplo de Uso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f6fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+        h1 {
+            color: #1E90FF;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid #1E90FF;
+            background: #f8f9fa;
+        }
+        .step h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+        .btn {
+            display: inline-block;
+            background: #1E90FF;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #2980b9;
+            color: white;
+            text-decoration: none;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature i {
+            font-size: 2rem;
+            color: #1E90FF;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-rocket"></i> PortariaTech SPA</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            Sistema de Gerenciamento de Portaria - Single Page Application
+        </p>
+
+        <div class="highlight">
+            <strong>🎉 Parabéns!</strong> O sistema foi convertido com sucesso para uma arquitetura SPA moderna. 
+            Agora todas as navegações são feitas via JavaScript, proporcionando uma experiência mais fluida e rápida.
+            <strong>A identidade visual original foi mantida!</strong>
+        </div>
+
+        <h2><i class="fas fa-list"></i> Como Usar</h2>
+
+        <div class="step">
+            <h3>1. Iniciar o Backend</h3>
+            <p>Certifique-se de que o servidor Laravel está rodando:</p>
+            <div class="code">cd backend
+php artisan serve --host=0.0.0.0 --port=8000</div>
+        </div>
+
+        <div class="step">
+            <h3>2. Iniciar o Frontend</h3>
+            <p>Execute o script de inicialização do servidor local:</p>
+            <div class="code">cd frontend
+./start-server.sh</div>
+            <p>Ou use Python diretamente:</p>
+            <div class="code">python3 -m http.server 3000</div>
+        </div>
+
+        <div class="step">
+            <h3>3. Acessar o Sistema</h3>
+            <p>Abra seu navegador e acesse:</p>
+            <div class="code">http://localhost:3000/app.html</div>
+        </div>
+
+        <h2><i class="fas fa-star"></i> Funcionalidades Principais</h2>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-tachometer-alt"></i>
+                <h4>Dashboard Interativo</h4>
+                <p>Menu principal com navegação fluida entre todas as funcionalidades</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-user-plus"></i>
+                <h4>Cadastro de Visitantes</h4>
+                <p>Formulário completo com validação e máscaras automáticas</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-search"></i>
+                <h4>Localizar Moradores</h4>
+                <p>Busca rápida por telefone ou número do apartamento</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-box"></i>
+                <h4>Gerenciar Entregas</h4>
+                <p>Controle de entregas e encomendas pendentes</p>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-code"></i> Estrutura do Projeto</h2>
+
+        <div class="step">
+            <h3>Arquivos Principais</h3>
+            <ul>
+                <li><strong>app.html</strong> - Página principal da aplicação SPA</li>
+                <li><strong>app.js</strong> - Sistema de roteamento e lógica principal</li>
+                <li><strong>spa.css</strong> - Estilos específicos do SPA (mantendo cores originais)</li>
+                <li><strong>config.js</strong> - Configurações da aplicação</li>
+                <li><strong>start-server.sh</strong> - Script para iniciar servidor local</li>
+            </ul>
+        </div>
+
+        <h2><i class="fas fa-route"></i> Rotas Disponíveis</h2>
+
+        <div class="step">
+            <h3>Navegação SPA</h3>
+            <ul>
+                <li><code>/</code> ou <code>/login</code> - Tela de login</li>
+                <li><code>/dashboard</code> - Menu principal</li>
+                <li><code>/localizar</code> - Buscar moradores</li>
+                <li><code>/cadastro-visitantes</code> - Cadastrar visitantes</li>
+                <li><code>/entregas</code> - Gerenciar entregas</li>
+                <li><code>/perfil</code> - Configurações do usuário</li>
+                <li><code>/recuperar-senha</code> - Recuperar senha</li>
+            </ul>
+        </div>
+
+        <h2><i class="fas fa-lightbulb"></i> Vantagens do SPA</h2>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h4>Performance</h4>
+                <p>Carregamento mais rápido após a primeira visita</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>Responsivo</h4>
+                <p>Funciona perfeitamente em dispositivos móveis</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-sync"></i>
+                <h4>Navegação Fluida</h4>
+                <p>Transições suaves sem recarregamento de página</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Seguro</h4>
+                <p>Sistema de autenticação integrado</p>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-palette"></i> Identidade Visual</h2>
+
+        <div class="step">
+            <h3>Cores Mantidas</h3>
+            <p>O sistema SPA mantém a identidade visual original do projeto:</p>
+            <ul>
+                <li><strong>Cor Primária:</strong> #1E90FF (Azul)</li>
+                <li><strong>Cor Secundária:</strong> #2980b9 (Azul Escuro)</li>
+                <li><strong>Cor de Erro:</strong> #e74c3c (Vermelho)</li>
+                <li><strong>Cor de Sucesso:</strong> #2ecc71 (Verde)</li>
+                <li><strong>Fundo:</strong> #f5f6fa (Cinza Claro)</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="app.html" class="btn">
+                <i class="fas fa-play"></i> Acessar Sistema
+            </a>
+            <a href="README_SPA.md" class="btn" style="background: #2ecc71;">
+                <i class="fas fa-book"></i> Documentação
+            </a>
+        </div>
+
+        <div class="highlight" style="margin-top: 30px;">
+            <strong>💡 Dica:</strong> Para desenvolvimento, mantenha o console do navegador aberto (F12) 
+            para ver logs e debug do sistema SPA.
+        </div>
+    </div>
+</body>
+</html> 

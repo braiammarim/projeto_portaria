@@ -129,13 +129,6 @@
                 <!-- Lista de Visitantes -->
                 <h3>Visitantes Cadastrados</h3>
                 
-                <!-- Botão de teste -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-info" onclick="testarFuncoes()">
-                        Testar Funções JavaScript
-                    </button>
-                </div>
-                
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
@@ -179,9 +172,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Teste de carregamento
-        console.log('=== SCRIPT CARREGADO ===');
-        
         // Configurar data mínima como hoje
         document.getElementById('data_entrada').min = new Date().toISOString().split('T')[0];
 
@@ -232,19 +222,15 @@
 
         // Listar visitantes
         async function listarVisitantes() {
-            console.log('Carregando lista de visitantes...');
             try {
                 const response = await fetch('http://localhost:8000/api/visitantes');
-                console.log('Response status:', response.status);
                 
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('Erro na resposta:', errorText);
                     throw new Error(`Erro ao carregar visitantes: ${response.status}`);
                 }
                 
                 const data = await response.json();
-                console.log('Visitantes carregados:', data);
                 
                 const tbody = document.getElementById('visitantesList');
                 if (!data || data.length === 0) {
@@ -253,11 +239,7 @@
                 }
 
                 tbody.innerHTML = data.map(visitante => {
-                    console.log('Gerando linha para visitante:', visitante);
-                    const botaoEditar = `<button class="btn btn-sm btn-warning me-1" onclick="editarVisitante(${visitante.id})">Editar</button>`;
-                    const botaoExcluir = `<button class="btn btn-sm btn-danger" onclick="excluirVisitante(${visitante.id})">Excluir</button>`;
-                    
-                    return `
+                    const htmlLinha = `
                     <tr>
                         <td>${visitante.nome || ''}</td>
                         <td>${visitante.cpf || ''}</td>
@@ -270,14 +252,19 @@
                             </span>
                         </td>
                         <td>
-                            ${botaoEditar}
-                            ${botaoExcluir}
+                            <button class="btn btn-sm btn-warning" onclick="editarVisitante(${visitante.id})">
+                                Editar
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="excluirVisitante(${visitante.id})">
+                                Excluir
+                            </button>
                         </td>
                     </tr>
                 `;
+                
+                return htmlLinha;
                 }).join('');
             } catch (error) {
-                console.error('Erro ao listar visitantes:', error);
                 const tbody = document.getElementById('visitantesList');
                 tbody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Erro ao carregar visitantes: ${error.message}</td></tr>`;
                 showMessage(error.message, 'danger');
@@ -313,10 +300,6 @@
                 
                 const method = isEditing ? 'PUT' : 'POST';
                 
-                console.log(`${isEditing ? 'Atualizando' : 'Cadastrando'} visitante:`, data);
-                console.log('URL:', url);
-                console.log('Method:', method);
-
                 const response = await fetch(url, {
                     method: method,
                     headers: {
@@ -325,16 +308,12 @@
                     body: JSON.stringify(data)
                 });
 
-                console.log('Response status:', response.status);
-
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('Erro na resposta:', errorText);
                     throw new Error(`Erro ao ${isEditing ? 'atualizar' : 'cadastrar'} visitante: ${response.status}`);
                 }
 
                 const result = await response.json();
-                console.log('Resultado:', result);
 
                 showMessage(`Visitante ${isEditing ? 'atualizado' : 'cadastrado'} com sucesso!`);
                 
@@ -356,28 +335,20 @@
                 
                 listarVisitantes();
             } catch (error) {
-                console.error('Erro:', error);
                 showMessage(error.message, 'danger');
             }
         });
 
         // Editar visitante
         async function editarVisitante(id) {
-            console.log('=== FUNÇÃO EDITAR CHAMADA ===');
-            console.log('Editando visitante com ID:', id);
-            
             try {
                 const response = await fetch(`http://localhost:8000/api/visitantes/${id}`);
-                console.log('Response status:', response.status);
                 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Erro na resposta:', errorText);
                     throw new Error(`Erro ao carregar dados do visitante: ${response.status}`);
                 }
                 
                 const data = await response.json();
-                console.log('Dados do visitante:', data);
                 
                 // Preencher formulário
                 document.getElementById('nome').value = data.nome || '';
@@ -415,16 +386,12 @@
                 
                 showMessage('Modo de edição ativado. Preencha os campos e clique em "Atualizar Visitante"', 'info');
             } catch (error) {
-                console.error('Erro ao editar visitante:', error);
                 showMessage(error.message, 'danger');
             }
         }
 
         // Excluir visitante
         async function excluirVisitante(id) {
-            console.log('=== FUNÇÃO EXCLUIR CHAMADA ===');
-            console.log('Excluindo visitante com ID:', id);
-            
             if (!confirm('Tem certeza que deseja excluir este visitante?')) {
                 return;
             }
@@ -437,25 +404,19 @@
                     }
                 });
                 
-                console.log('Response status:', response.status);
-
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Erro na resposta:', errorText);
                     throw new Error(`Erro ao excluir visitante: ${response.status}`);
                 }
 
                 showMessage('Visitante excluído com sucesso!');
                 listarVisitantes();
             } catch (error) {
-                console.error('Erro ao excluir visitante:', error);
                 showMessage(error.message, 'danger');
             }
         }
 
         // Cancelar edição
         function cancelarEdicao() {
-            console.log('Cancelando edição...');
             const form = document.getElementById('visitanteForm');
             
             // Resetar formulário
@@ -471,51 +432,24 @@
             submitButton.classList.remove('btn-warning');
             submitButton.classList.add('btn-primary');
             
-            // Esconder botão cancelar
-            document.getElementById('cancelarEdicao').style.display = 'none';
+            // Esconder botão cancelar - múltiplas abordagens
+            const cancelarBtn = document.getElementById('cancelarEdicao');
+            if (cancelarBtn) {
+                cancelarBtn.style.display = 'none';
+                cancelarBtn.style.visibility = 'hidden';
+                cancelarBtn.hidden = true;
+            }
+            
+            // Alternativa: esconder via CSS
+            const style = document.createElement('style');
+            style.textContent = '#cancelarEdicao { display: none !important; }';
+            document.head.appendChild(style);
             
             showMessage('Edição cancelada', 'info');
         }
 
-        // Função de teste
-        function testarFuncoes() {
-            console.log('=== TESTE DE FUNÇÕES ===');
-            alert('Função de teste chamada!');
-            
-            // Testar se as funções existem
-            if (typeof editarVisitante === 'function') {
-                console.log('✓ Função editarVisitante existe');
-            } else {
-                console.log('✗ Função editarVisitante NÃO existe');
-            }
-            
-            if (typeof excluirVisitante === 'function') {
-                console.log('✓ Função excluirVisitante existe');
-            } else {
-                console.log('✗ Função excluirVisitante NÃO existe');
-            }
-            
-            if (typeof listarVisitantes === 'function') {
-                console.log('✓ Função listarVisitantes existe');
-            } else {
-                console.log('✗ Função listarVisitantes NÃO existe');
-            }
-        }
-
         // Carregar lista ao iniciar
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('=== DOM CARREGADO ===');
-            console.log('Elementos encontrados:');
-            console.log('- visitanteForm:', document.getElementById('visitanteForm'));
-            console.log('- visitantesList:', document.getElementById('visitantesList'));
-            console.log('- cancelarEdicao:', document.getElementById('cancelarEdicao'));
-            
-            // Testar se as funções estão disponíveis
-            console.log('Funções disponíveis:');
-            console.log('- editarVisitante:', typeof editarVisitante);
-            console.log('- excluirVisitante:', typeof excluirVisitante);
-            console.log('- listarVisitantes:', typeof listarVisitantes);
-            
             listarVisitantes();
         });
     </script>

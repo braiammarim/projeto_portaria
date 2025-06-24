@@ -120,7 +120,6 @@ class VisitanteController extends Controller
             'email' => 'nullable|email|max:100',
             'apartamento_visitado' => 'required|string|max:10',
             'motivo_visita' => 'nullable|string|max:50',
-            'data_entrada' => 'required|date',
             'observacoes' => 'nullable|string|max:500',
         ]);
 

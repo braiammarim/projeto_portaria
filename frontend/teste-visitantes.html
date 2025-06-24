@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Visitantes</title>
+</head>
+<body>
+    <h1>Teste de Funcionalidades</h1>
+    
+    <button onclick="testarEditar(1)">Testar Editar ID 1</button>
+    <button onclick="testarExcluir(1)">Testar Excluir ID 1</button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        console.log('=== TESTE INICIADO ===');
+        
+        function testarEditar(id) {
+            console.log('Testando editar ID:', id);
+            alert('Teste editar: ' + id);
+            
+            fetch(`http://localhost:8000/api/visitantes/${id}`)
+                .then(response => {
+                    console.log('Status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Dados:', data);
+                    document.getElementById('resultado').innerHTML = '<p>Dados carregados: ' + JSON.stringify(data) + '</p>';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('resultado').innerHTML = '<p>Erro: ' + error.message + '</p>';
+                });
+        }
+        
+        function testarExcluir(id) {
+            console.log('Testando excluir ID:', id);
+            alert('Teste excluir: ' + id);
+            
+            if (confirm('Confirmar exclusão?')) {
+                fetch(`http://localhost:8000/api/visitantes/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    console.log('Status:', response.status);
+                    document.getElementById('resultado').innerHTML = '<p>Exclusão realizada. Status: ' + response.status + '</p>';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('resultado').innerHTML = '<p>Erro: ' + error.message + '</p>';
+                });
+            }
+        }
+    </script>
+</body>
+</html> 
